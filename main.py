@@ -1,16 +1,18 @@
-# This is a sample Python script.
+# Import bibliotek
+import psycopg2 as db
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Połączenie z bazą danych PosgtreSQL
+con = db.connect(host = "195.150.230.208", port = 5432, database = "2022_nazwisko_imie", user = "2022_nazwisko_imie", password = "*****")
 
+# Utworzenie kursora
+cursor = con.cursor()
+# Tworzenie i wykonanie zapytania
+cursor.execute("select true")
+# Odczytanie wyników zapytania do kolekcji w formie listy
+resultset = cursor.fetchall()
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+print(resultset[0][0])
 
+# Zamknięcie połączenia
+con.close()
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
