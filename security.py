@@ -1,5 +1,6 @@
 import argon2
-
+import random
+import string
 ph = argon2.PasswordHasher()
 
 def hashPassword(password):
@@ -14,3 +15,10 @@ def verifyPassword(password,hash):
     except argon2.exceptions.VerifyMismatchError as e:
         print(e)
     return False
+
+def generateCodes():
+    source = string.ascii_letters + string.digits
+    codes=[]
+    for i in range(1,31):
+        codes.append( ''.join((random.choice(source) for i in range(5))))
+    return codes
