@@ -21,4 +21,5 @@ def generateCodes():
     codes=[]
     for i in range(1,31):
         codes.append( ''.join((random.choice(source) for i in range(5))))
+    print(codes)
     return codes
