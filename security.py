@@ -7,3 +7,10 @@ def hashPassword(password):
                                encoding="utf-8", type=argon2.Type.ID)
     return ph.hash(password)
 
+def verifyPassword(password,hash):
+    try:
+        ph.verify(hash, password)
+        return True
+    except argon2.exceptions.VerifyMismatchError as e:
+        print(e)
+    return False
