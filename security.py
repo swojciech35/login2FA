@@ -41,6 +41,6 @@ def verifyCode(code,codes):
             print("code accept")
             return True
         except:
-            print("verify code")
+            None
 
     return False
