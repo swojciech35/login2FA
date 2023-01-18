@@ -4,7 +4,6 @@ def getPassword(login):
 
     con = db.connect(host = "195.150.230.208", port = 5432, database = "2022_nazwisko_imie", user = "2022_nazwisko_imie", password = "*****")
 
-
     cursor = con.cursor()
     cursor.execute("SELECT password FROM login2fa.user WHERE login = %s",(login,))
     resultset = cursor.fetchall()
@@ -45,3 +44,17 @@ def insertCodes(login, codes):
         con.commit()
         cursor.close()
     con.close()
+
+def getcodes(login):
+    id = getUserId(login)
+    codes=[]
+    con = db.connect(host = "195.150.230.208", port = 5432, database = "2022_nazwisko_imie", user = "2022_nazwisko_imie", password = "*****")
+
+
+    cursor = con.cursor()
+    cursor.execute("SELECT code FROM login2fa.verify_code WHERE user_id = %s", (id,))
+    queryResult = cursor.fetchall()
+    con.close()
+    for x in queryResult:
+        codes.append(x[0])
+    return codes
