@@ -34,3 +34,13 @@ def hashCodes(codes):
     return codesHash
 
 
+def verifyCode(code,codes):
+    for i in codes:
+        try:
+            ph.verify(i,code)
+            print("code accept")
+            return True
+        except:
+            print("verify code")
+
+    return False
