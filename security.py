@@ -23,3 +23,14 @@ def generateCodes():
         codes.append( ''.join((random.choice(source) for i in range(5))))
     print(codes)
     return codes
+
+def hashCodes(codes):
+    ph = argon2.PasswordHasher(time_cost=32, memory_cost=2 ** 15, parallelism=4, hash_len=64, salt_len=32,
+                               encoding="utf-8", type=argon2.Type.ID)
+    codesHash=[]
+    for i in codes:
+        codesHash.append(ph.hash(i))
+
+    return codesHash
+
+
