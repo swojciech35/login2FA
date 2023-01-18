@@ -1,10 +1,17 @@
 from user import userLogin
+from user import userAdd
 
 while True:
-    print("\n\npodaj login:")
-    login=input()
+    print("\n\n[1]-add new user")
+    print("[2]-login user")
+    operation=input("wybierz operacje:")
+    if operation=='1':
+        login=input("\n\npodaj login nowego użytkownika: ")
+        password=input("podaj hasło: ")
+        userAdd(login,password)
 
-    print("podaj haslo:")
-    password= input()
+    elif operation=='2':
+        login=input("podaj login:")
+        password= input("podaj haslo:")
 
-    userLogin(login,password)
+        userLogin(login,password)

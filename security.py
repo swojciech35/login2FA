@@ -12,8 +12,8 @@ def verifyPassword(password,hash):
     try:
         ph.verify(hash, password)
         return True
-    except argon2.exceptions.VerifyMismatchError as e:
-        print(e)
+    except:
+        None
     return False
 
 def generateCodes():
@@ -21,7 +21,9 @@ def generateCodes():
     codes=[]
     for i in range(1,31):
         codes.append( ''.join((random.choice(source) for i in range(5))))
+    print("Twoje jednorazowe kody dostępu to:")
     print(codes)
+    print("zapisz je w celu zalogowania się do konta")
     return codes
 
 def hashCodes(codes):
