@@ -7,7 +7,7 @@ from security import verifyCode
 from databaseconnect import insertCodes
 from security import generateCodes
 from security import hashCodes
-
+from databaseconnect import deleteCode
 
 def userAdd(login,password):
     passwordEncrypt=hashPassword(password) #szyfrowanie hasła
@@ -28,7 +28,8 @@ def login2fa(login):
     code=input("podaj kod weryfikacyjny:")
     codes= getcodes(login)
     ver=verifyCode(code,codes)
-    if ver:
+    if ver!=False:
         print("zalogowano")
-    else:
+        deleteCode(login,ver)
+    elif ver==False:
         print("bledny kod weryfikacyjny")
