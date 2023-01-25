@@ -14,9 +14,20 @@ def getPassword(login):
     else:
         return False
 
+def userExist(login):
+    con = db.connect(host = "195.150.230.208", port = 5432, database = "2022_nazwisko_imie", user = "2022_nazwisko_imie", password = "*****")
+
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM login2fa.user WHERE login = %s", (login,))
+    resultset = cursor.fetchall()
+    con.close()
+    if len(resultset) > 0:
+        return True
+    else:
+        return False
+
 def insertUser(login, password):
     con = db.connect(host="195.150.230.208", port=5432, database="2022_nazwisko_imie", user="2022_nazwisko_imie",password="*****")
-
 
     cursor = con.cursor()
     cursor.execute("INSERT INTO login2fa.user (login, password) VALUES(%s, %s)", (login,password))
@@ -37,8 +48,8 @@ def getUserId(login):
 
 def insertCodes(login, codes):
     id = getUserId(login)
-    con = db.connect(host="195.150.230.208", port=5432, database="2022_nazwisko_imie", user="2022_nazwisko_imie",password="*****")
 
+    con = db.connect(host="195.150.230.208", port=5432, database="2022_nazwisko_imie", user="2022_nazwisko_imie",password="*****")
     for x in codes:
         cursor = con.cursor()
         cursor.execute("INSERT INTO login2fa.verify_code (user_id,code)\

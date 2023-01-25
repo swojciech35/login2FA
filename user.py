@@ -8,12 +8,15 @@ from databaseconnect import insertCodes
 from security import generateCodes
 from security import hashCodes
 from databaseconnect import deleteCode
-
+from databaseconnect import userExist
 def userAdd(login,password):
-    passwordEncrypt=hashPassword(password) #szyfrowanie hasła
-    insertUser(login,passwordEncrypt)
-    insertCodes(login,hashCodes(generateCodes()))
-    print("Dodano nowego użytkownika")
+    if userExist(login):
+        print("nazwa użytkownika jest zajęta")
+    else:
+        passwordEncrypt=hashPassword(password) #szyfrowanie hasła
+        insertUser(login,passwordEncrypt)
+        insertCodes(login,hashCodes(generateCodes()))
+        print("Dodano nowego użytkownika")
 def userLogin(login,password):
     passwordEnctypted=getPassword(login)
     if passwordEnctypted !=False:
